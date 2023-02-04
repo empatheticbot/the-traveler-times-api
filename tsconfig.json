@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "allowJs": true,
+    "moduleResolution": "Node",
+    "declaration": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["esnext", "webworker"]
+  }
+}
