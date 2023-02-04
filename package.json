@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/empatheticbot/the-traveler-times-api#readme",
   "dependencies": {
-    "@netlify/functions": "^1.4.0"
+    "@netlify/functions": "^1.4.0",
+    "node-fetch": "^3.3.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",

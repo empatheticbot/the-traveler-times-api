@@ -1,3 +1,5 @@
+import fetch from 'node-fetch'
+
 import { BungieErrorStatus } from './BungieAPIError'
 
 interface BungieAPIManifestResponse {
