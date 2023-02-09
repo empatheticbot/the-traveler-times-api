@@ -9,21 +9,23 @@ export async function updateEnvVariable(
   const url = new URL(`${baseUrl}/env/${key}`)
   url.searchParams.set('site_id', process.env.NETLIFY_SITE_ID)
   console.log(url.toString())
+  const body = JSON.stringify({
+    values: [
+      {
+        id: 'string',
+        value: value,
+        context: 'all',
+      },
+    ],
+    key: key,
+  })
+  console.log(body)
   return fetch(url.toString(), {
     headers: {
       Authorization: `Bearer ${process.env.NETLIFY_AUTH_TOKEN}`,
     },
     method: 'put',
-    body: JSON.stringify({
-      values: [
-        {
-          id: 'string',
-          value: value,
-          context: 'all',
-        },
-      ],
-      key: key,
-    }),
+    body,
   }).then(async (response) => {
     const data = await response.json()
     console.log('Env update response: ', response.status, data)
