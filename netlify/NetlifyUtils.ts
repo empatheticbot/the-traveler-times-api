@@ -54,5 +54,9 @@ export async function redeploySite() {
       Authorization: `Bearer ${process.env.NETLIFY_AUTH_TOKEN}`,
     },
     method: 'post',
+  }).then(async (response) => {
+    const data = await response.json()
+    console.log(response.status, data)
+    return data
   })
 }
