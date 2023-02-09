@@ -8,6 +8,7 @@ export async function updateEnvVariable(
 ): Promise<unknown> {
   const url = new URL(`${baseUrl}/env/${key}`)
   url.searchParams.set('site_id', process.env.NETLIFY_SITE_ID)
+  console.log(url.toString())
   return fetch(url.toString(), {
     headers: {
       Authorization: `Bearer ${process.env.NETLIFY_AUTH_TOKEN}`,
@@ -25,7 +26,7 @@ export async function updateEnvVariable(
     }),
   }).then(async (response) => {
     const data = await response.json()
-    console.log(response.status, data)
+    console.log('Env update response: ', response.status, data)
     return data
   })
 }
@@ -50,13 +51,10 @@ export async function updateEnvVariable(
 export async function redeploySite() {
   const url = new URL(process.env.NETLIFY_DEPLOY_URL)
   return fetch(url.toString(), {
-    headers: {
-      Authorization: `Bearer ${process.env.NETLIFY_AUTH_TOKEN}`,
-    },
     method: 'post',
   }).then(async (response) => {
     const data = await response.json()
-    console.log(response.status, data)
+    console.log('Redeploy response: ', response.status, data)
     return data
   })
 }
