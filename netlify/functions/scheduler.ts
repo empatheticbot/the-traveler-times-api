@@ -42,7 +42,7 @@ const myHandler: Handler = async (
     )
   }
   await Promise.all(envUpdates)
-  redeploySite()
+  await redeploySite()
 
   return {
     statusCode: 200,
