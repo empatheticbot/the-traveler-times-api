@@ -25,3 +25,30 @@ export async function updateEnvVariable(
     }),
   })
 }
+
+// export async function updateEnvVariable(
+//   key: string,
+//   value: string
+// ): Promise<unknown> {
+//   const url = new URL(`${baseUrl}/env/${key}`)
+//   url.searchParams.set('site_id', process.env.NETLIFY_SITE_ID)
+//   return fetch(url.toString(), {
+//     headers: {
+//       Authorization: `Bearer ${process.env.NETLIFY_AUTH_TOKEN}`,
+//     },
+//     method: 'patch',
+//     body: JSON.stringify({
+//       value: value,
+//     }),
+//   })
+// }
+
+export async function redeploySite() {
+  const url = new URL(process.env.NETLIFY_DEPLOY_URL)
+  return fetch(url.toString(), {
+    headers: {
+      Authorization: `Bearer ${process.env.NETLIFY_AUTH_TOKEN}`,
+    },
+    method: 'post',
+  })
+}
