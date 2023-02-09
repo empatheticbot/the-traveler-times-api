@@ -5,13 +5,12 @@ import {
   schedule,
 } from '@netlify/functions'
 import fetch from 'node-fetch'
-import { updateEnvVariable } from '../NetlifyUtils'
+import { redeploySite, updateEnvVariable } from '../NetlifyUtils'
 
 const myHandler: Handler = async (
   event: HandlerEvent,
   context: HandlerContext
 ) => {
-  console.log('Received event:', event)
   const client_id = process.env.BUNGIE_CLIENT_ID
   const client_secret = process.env.BUNGIE_CLIENT_SECRET
   const refresh_token = process.env.BUNGIE_REFRESH_TOKEN
@@ -28,7 +27,6 @@ const myHandler: Handler = async (
       body: body,
     }
   )
-  console.log(body)
   let data = await response.json()
   console.log(data)
   let access_token = data?.access_token
@@ -44,6 +42,8 @@ const myHandler: Handler = async (
     )
   }
   await Promise.all(envUpdates)
+  redeploySite()
+
   return {
     statusCode: 200,
   }

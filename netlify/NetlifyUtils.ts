@@ -23,6 +23,8 @@ export async function updateEnvVariable(
       ],
       key: key,
     }),
+  }).then((response) => {
+    console.log(response)
   })
 }
 
