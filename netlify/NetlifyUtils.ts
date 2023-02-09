@@ -23,6 +23,7 @@ export async function updateEnvVariable(
   return fetch(url.toString(), {
     headers: {
       Authorization: `Bearer ${process.env.NETLIFY_AUTH_TOKEN}`,
+      'Content-Type': 'application/json; charset=utf-8',
     },
     method: 'put',
     body,
