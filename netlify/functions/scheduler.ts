@@ -49,6 +49,6 @@ const myHandler: Handler = async (
   }
 }
 
-const handler = schedule('3, 33 * * * *', myHandler)
+const handler = schedule('3,33 * * * *', myHandler)
 
 export { handler }
