@@ -28,9 +28,9 @@ const myHandler: Handler = async (
       body: body,
     }
   )
-
+  console.log(body)
   let data = await response.json()
-
+  console.log(data)
   let access_token = data?.access_token
   let new_refresh_token = data?.refresh_token
 
