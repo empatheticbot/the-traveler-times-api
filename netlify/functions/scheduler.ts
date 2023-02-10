@@ -7,6 +7,11 @@ import {
 import fetch from 'node-fetch'
 import { redeploySite, updateEnvVariable } from '../NetlifyUtils'
 
+interface BungieAuthorizationResponse {
+  access_token: string
+  refresh_token: string
+}
+
 const myHandler: Handler = async (
   event: HandlerEvent,
   context: HandlerContext
@@ -27,7 +32,8 @@ const myHandler: Handler = async (
       body: body,
     }
   )
-  const data = await response.json()
+  const data: BungieAuthorizationResponse =
+    (await response.json()) as BungieAuthorizationResponse
   const accessToken = data?.access_token
   const newRefreshToken = data?.refresh_token
 

@@ -3,6 +3,6 @@ interface EventHeaders {
 }
 
 export function isAuthorized(headers: EventHeaders): boolean {
-  const authKey = headers['TTT-API-KEY']
+  const authKey = headers['ttt-api-key']
   return authKey && authKey === process.env.TTT_API_KEY
 }

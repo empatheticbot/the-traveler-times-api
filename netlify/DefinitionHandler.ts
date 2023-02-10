@@ -20,7 +20,6 @@ export default class DefinitionHandler {
       request = this.bungieAPIHandler.getDefinitionFromManifest(definitionName)
       this.inFlightDefinitionRequests[definitionName] = request
       definitions = await request
-      // console.log(definitions)
     } catch (e) {
       console.error(e)
     }

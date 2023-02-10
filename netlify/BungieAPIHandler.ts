@@ -110,7 +110,6 @@ export default class BungieAPIHandler {
       console.error(`Failed to call bungie platform api ${e}`)
       return Promise.reject(`Failed to call bungie platform api ${e}`)
     }
-    console.log(resp.status)
     if (!resp.ok) {
       if (resp.status === 401) {
         console.error(
@@ -120,14 +119,10 @@ export default class BungieAPIHandler {
       }
       return Promise.reject('Bungie API failed.')
     }
-    // console.log(resp.json())
     let json
     try {
-      // console.log(resp)
       json = await resp.json()
-      console.log('parsed')
     } catch (e) {
-      console.error(e)
       return Promise.reject(e)
     }
     return json
@@ -181,7 +176,6 @@ export default class BungieAPIHandler {
   }
 
   async getDefinitionFromManifest(definition: BungieD2Definition) {
-    console.log(definition)
     if (typeof definition !== 'string') {
       return Promise.reject(
         'Parameter `definition` is required and must be of type string.'
