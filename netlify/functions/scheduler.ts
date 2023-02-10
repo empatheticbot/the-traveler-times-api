@@ -15,7 +15,7 @@ const myHandler: Handler = async (
   const client_secret = process.env.BUNGIE_CLIENT_SECRET
   const refresh_token = process.env.BUNGIE_REFRESH_TOKEN
 
-  let body = `grant_type=refresh_token&client_id=${client_id}&client_secret=${client_secret}&refresh_token=${refresh_token}`
+  const body = `grant_type=refresh_token&client_id=${client_id}&client_secret=${client_secret}&refresh_token=${refresh_token}`
 
   const response = await fetch(
     'https://www.bungie.net/platform/app/oauth/token/',
@@ -27,22 +27,33 @@ const myHandler: Handler = async (
       body: body,
     }
   )
-  let data = await response.json()
-  console.log(data)
-  let access_token = data?.access_token
-  let new_refresh_token = data?.refresh_token
+  const data = await response.json()
+  const accessToken = data?.access_token
+  const newRefreshToken = data?.refresh_token
 
   let envUpdates: Promise<unknown>[] = []
-  if (access_token) {
-    envUpdates.push(updateEnvVariable('BUNGIE_OAUTH_TOKEN', access_token))
+  if (accessToken) {
+    envUpdates.push(updateEnvVariable('BUNGIE_OAUTH_TOKEN', accessToken))
   }
-  if (new_refresh_token) {
-    envUpdates.push(
-      updateEnvVariable('BUNGIE_REFRESH_TOKEN', new_refresh_token)
-    )
+  if (newRefreshToken) {
+    envUpdates.push(updateEnvVariable('BUNGIE_REFRESH_TOKEN', newRefreshToken))
   }
-  await Promise.all(envUpdates)
-  await redeploySite()
+  try {
+    await Promise.all(envUpdates)
+  } catch (e) {
+    console.error('Failed to update env variables: ', e)
+    return {
+      statusCode: 500,
+    }
+  }
+  try {
+    await redeploySite()
+  } catch (e) {
+    console.error('Failed to redeploy site: ', e)
+    return {
+      statusCode: 500,
+    }
+  }
 
   return {
     statusCode: 200,
