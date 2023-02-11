@@ -29,7 +29,7 @@ async function getDefinitions(event: HandlerEvent) {
     }
   }
   const requestedDefinitions =
-    definitionIds.length > 0
+    definitionIds?.length > 0
       ? definitionIds.map((hash: string) => allDefinitions[hash])
       : allDefinitions
   return requestedDefinitions
