@@ -8,8 +8,12 @@ async function getDefinitions(event: HandlerEvent) {
   const definitionType: BungieD2Definition | null = event.queryStringParameters[
     'definitionType'
   ] as BungieD2Definition
-  const definitionIds = event.multiValueQueryStringParameters['definitionIds']
+  let definitionIds = event.multiValueQueryStringParameters['definitionIds']
 
+  if (definitionIds) {
+    const body = JSON.parse(event.body)
+    definitionIds = body.definitionIds
+  }
   if (!definitionType) {
     return {
       statusCode: 400,
