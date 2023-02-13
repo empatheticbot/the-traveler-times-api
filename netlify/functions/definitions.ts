@@ -10,7 +10,7 @@ async function getDefinitions(event: HandlerEvent) {
   ] as BungieD2Definition
   let definitionIds = event.multiValueQueryStringParameters['definitionIds']
 
-  if (definitionIds) {
+  if (!definitionIds) {
     const body = JSON.parse(event.body)
     definitionIds = body.definitionIds
   }
