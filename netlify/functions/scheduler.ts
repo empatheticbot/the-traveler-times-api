@@ -12,6 +12,10 @@ interface BungieAuthorizationResponse {
   refresh_token: string
 }
 
+export async function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(() => resolve(undefined), ms))
+}
+
 const myHandler: Handler = async (
   event: HandlerEvent,
   context: HandlerContext
@@ -53,6 +57,7 @@ const myHandler: Handler = async (
     }
   }
   try {
+    await delay(10000)
     await redeploySite()
   } catch (e) {
     console.error('Failed to redeploy site: ', e)
