@@ -57,7 +57,6 @@ const myHandler: Handler = async (
     }
   }
   try {
-    await delay(5000)
     await redeploySite()
   } catch (e) {
     console.error('Failed to redeploy site: ', e)
@@ -71,6 +70,6 @@ const myHandler: Handler = async (
   }
 }
 
-const handler = schedule('3 * * * *', myHandler)
+const handler = schedule('* */2 * * *', myHandler)
 
 export { handler }
