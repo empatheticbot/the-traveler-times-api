@@ -71,6 +71,6 @@ const myHandler: Handler = async (
   }
 }
 
-const handler = schedule('* */2 * * *', myHandler)
+const handler = schedule('0 */2 * * *', myHandler)
 
 export { handler }
