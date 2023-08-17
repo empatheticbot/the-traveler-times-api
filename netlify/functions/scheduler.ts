@@ -57,6 +57,7 @@ const myHandler: Handler = async (
     }
   }
   try {
+    await delay(10000)
     await redeploySite()
   } catch (e) {
     console.error('Failed to redeploy site: ', e)
